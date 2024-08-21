@@ -264,9 +264,9 @@ struct AlpEncode {
 	                                   int64_t*             encoded_integers,
 	                                   const factor_idx_t   factor_idx,
 	                                   const exponent_idx_t exponent_idx) {
-		alignas(64) static double   encoded_dbl_arr[1024];
-		alignas(64) static double   dbl_arr_without_specials[1024];
-		alignas(64) static uint64_t INDEX_ARR[1024];
+		alignas(64) double   encoded_dbl_arr[1024];
+		alignas(64) double   dbl_arr_without_specials[1024];
+		alignas(64) uint64_t INDEX_ARR[1024];
 
 		exp_p_t  current_exceptions_count {0};
 		uint64_t exceptions_idx {0};
@@ -344,9 +344,9 @@ struct AlpEncode {
 	                                   int64_t*             encoded_integers,
 	                                   const factor_idx_t   factor_idx,
 	                                   const exponent_idx_t exponent_idx) {
-		alignas(64) static float    encoded_dbl_arr[1024];
-		alignas(64) static float    dbl_arr_without_specials[1024];
-		alignas(64) static uint64_t INDEX_ARR[1024];
+		alignas(64) float    encoded_dbl_arr[1024];
+		alignas(64) float    dbl_arr_without_specials[1024];
+		alignas(64) uint64_t INDEX_ARR[1024];
 
 		exp_p_t  current_exceptions_count {0};
 		uint64_t exceptions_idx {0};

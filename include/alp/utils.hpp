@@ -39,7 +39,7 @@ struct AlpApiUtils {
 	                                       int64_t*  encoded_integers,
 	                                       state&    stt) {
 
-		static auto* tmp_index = new (std::align_val_t {64}) uint64_t[1024];
+		auto* tmp_index = new (std::align_val_t {64}) uint64_t[1024];
 
 		// We fill a vector with 0s since these values will never be exceptions
 		for (size_t i = stt.vector_size; i < config::VECTOR_SIZE; i++) {
