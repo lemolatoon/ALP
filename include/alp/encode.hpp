@@ -297,16 +297,16 @@ struct AlpEncode {
 			encoded_dbl_arr[i]          = decoded_value;
 		}
 
-#ifdef __AVX512F__
-		for (size_t i {0}; i < config::VECTOR_SIZE; i = i + 8) {
-			__m512d l            = _mm512_loadu_pd(tmp_dbl_arr + i);
-			__m512d r            = _mm512_loadu_pd(input_vector + i);
-			__m512i index        = _mm512_loadu_pd(INDEX_ARR + i);
-			auto    is_exception = _mm512_cmpneq_pd_mask(l, r);
-			_mm512_mask_compressstoreu_pd(tmp_index + exceptions_idx, is_exception, index);
-			exceptions_idx += LOOKUP_TABLE[is_exception];
-		}
-#else
+// #ifdef __AVX512F__
+// 		for (size_t i {0}; i < config::VECTOR_SIZE; i = i + 8) {
+// 			__m512d l            = _mm512_loadu_pd(tmp_dbl_arr + i);
+// 			__m512d r            = _mm512_loadu_pd(input_vector + i);
+// 			__m512i index        = _mm512_loadu_pd(INDEX_ARR + i);
+// 			auto    is_exception = _mm512_cmpneq_pd_mask(l, r);
+// 			_mm512_mask_compressstoreu_pd(tmp_index + exceptions_idx, is_exception, index);
+// 			exceptions_idx += LOOKUP_TABLE[is_exception];
+// 		}
+// #else
 		for (size_t i {0}; i < config::VECTOR_SIZE; i++) {
 			auto l                    = encoded_dbl_arr[i];
 			auto r                    = dbl_arr_without_specials[i];
@@ -314,7 +314,7 @@ struct AlpEncode {
 			INDEX_ARR[exceptions_idx] = i;
 			exceptions_idx += is_exception;
 		}
-#endif
+// #endif
 
 		int64_t a_non_exception_value = 0;
 		for (size_t i {0}; i < config::VECTOR_SIZE; i++) {
@@ -377,16 +377,16 @@ struct AlpEncode {
 			encoded_dbl_arr[i]          = decoded_value;
 		}
 
-#ifdef __AVX512F__
-		for (size_t i {0}; i < config::VECTOR_SIZE; i = i + 16) {
-			__m512  l            = _mm512_loadu_ps(tmp_dbl_arr + i);
-			__m512  r            = _mm512_loadu_ps(input_vector + i);
-			__m512i index        = _mm512_loadu_ps(INDEX_ARR + i);
-			auto    is_exception = _mm512_cmpneq_ps_mask(l, r);
-			_mm512_mask_compressstoreu_ps(tmp_index + exceptions_idx, is_exception, index);
-			exceptions_idx += LOOKUP_TABLE[is_exception];
-		}
-#else
+// #ifdef __AVX512F__
+// 		for (size_t i {0}; i < config::VECTOR_SIZE; i = i + 16) {
+// 			__m512  l            = _mm512_loadu_ps(tmp_dbl_arr + i);
+// 			__m512  r            = _mm512_loadu_ps(input_vector + i);
+// 			__m512i index        = _mm512_loadu_ps(INDEX_ARR + i);
+// 			auto    is_exception = _mm512_cmpneq_ps_mask(l, r);
+// 			_mm512_mask_compressstoreu_ps(tmp_index + exceptions_idx, is_exception, index);
+// 			exceptions_idx += LOOKUP_TABLE[is_exception];
+// 		}
+// #else
 		for (size_t i {0}; i < config::VECTOR_SIZE; i++) {
 			auto l                    = encoded_dbl_arr[i];
 			auto r                    = dbl_arr_without_specials[i];
@@ -394,7 +394,7 @@ struct AlpEncode {
 			INDEX_ARR[exceptions_idx] = i;
 			exceptions_idx += is_exception;
 		}
-#endif
+// #endif
 
 		int64_t a_non_exception_value = 0;
 		for (size_t i {0}; i < config::VECTOR_SIZE; i++) {
